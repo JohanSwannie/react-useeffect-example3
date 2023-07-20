@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
 
-function App() {
+const PropChangeWatch = ({ a, b }) => {
+  useEffect(() => {
+    console.log("Prop a has changed and was detected in the useEffect Hook");
+  }, [a]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h4>
+        2 props on display: a={a} and b={b}
+      </h4>
+      <h4>The useEffect Hook has detected that Prop "a" has changed to {a}</h4>
     </div>
   );
-}
+};
+
+const App = () => {
+  const [count1, setCount1] = useState(0);
+  const [count2, setCount2] = useState(0);
+
+  return (
+    <div>
+      <PropChangeWatch a={count1} b={count2} />
+      <button onClick={() => setCount1(count1 + 1)}>Increment count1</button>
+      <button onClick={() => setCount2(count2 + 1)}>Increment count2</button>
+    </div>
+  );
+};
 
 export default App;
